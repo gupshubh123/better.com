@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { FETCH_POKEMON_INFO } from '../../constants';
 import './style.css';
 import Loader from '../../assets/loader.gif';
+import TrendingSuggestions from '../trendingSuggestions'
 import Card from './card';
 
 const PokemonSearch =() =>{
@@ -9,7 +10,11 @@ const PokemonSearch =() =>{
     const [pokemonData, setPokemonData] = useState({})
     const [error, setError] = useState(null)
     const [showLoader, setShowLoader] = useState(false)
-    
+    /**
+     * 
+     * @param {*} searchString 
+     * triggers search and sets the loading, data and error states
+     */
     const triggerSearch = async ( searchString ) => {
         setShowLoader(true)
         setError(false)
@@ -27,7 +32,11 @@ const PokemonSearch =() =>{
         }
     }
     
-    
+    /**
+     * 
+     * @param {*} e 
+     * checks if the user has pressed Enter key
+     */
     const checkKeyPressedHandler = (e) =>{
         const character = e.key
         const searchString = searchRef.current.value
@@ -57,6 +66,11 @@ const PokemonSearch =() =>{
         cardImage,
     }
     
+    const searchViaSuggestionHandler = (searchKey) =>{
+        triggerSearch(searchKey);
+        searchRef.current.value = searchKey
+    }
+
     return (
         <div className='pokeApiWrapper'>
             <div className='searchContainer'>
@@ -67,9 +81,14 @@ const PokemonSearch =() =>{
                 placeholder="Search By Name"
                 aria-placeholder="Search By Name"
                 aria-required="true"
-                role="textbox"
+                role="searchbox"
+                tabIndex={1}
                 />
             </div>
+            {(!Object.keys(pokemonData).length > 0 && !error && !showLoader)?
+                <TrendingSuggestions searchViaSuggestionHandler={searchViaSuggestionHandler} />
+            :null}
+            
             {showLoader && (
                 <div className='loader' role="alert" aria-busy="true">
                     <img src={Loader} alt="loader" />
@@ -77,7 +96,7 @@ const PokemonSearch =() =>{
             )}
             
             {Object.keys(pokemonData).length>0 ? (
-                <Card cardData={cardData} />
+                <Card cardData={cardData} tabIndex={2}/>
             ):null}
                 
             {error && (<div className='errorState' role="alert" aria-busy="false">  {error} </div>)}

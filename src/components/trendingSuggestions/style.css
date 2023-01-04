@@ -1,0 +1,31 @@
+.suggestionHandlerWrapper{
+    text-align: center;
+    margin-top: 30px;
+}
+.title{
+    font-size: 20px;
+}
+.list{
+    margin-top: 15px;
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+}
+.listItem{
+    margin-top: 12px;
+    border-radius: 6px;
+    border: 1px solid #c7c7c7;
+    font-size: 16px;
+    padding: 6px 15px;
+    cursor: pointer;
+
+}
+.listItem:hover{
+    background: #2b2b2b;
+    color: white;
+}
+@media only screen and (max-width: 600px) {
+    .list{
+        display: block;
+    }
+}

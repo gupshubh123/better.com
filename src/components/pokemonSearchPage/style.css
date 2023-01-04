@@ -127,3 +127,29 @@ text-transform: capitalize;
     color: #d35400;
     text-align: center;
 }
+
+@media only screen and (max-width: 600px) {
+    .pokeApiWrapper{
+        margin: 0 30px;
+    }
+    .searchInput{
+        width: 200px;
+    }
+    .cardWrapper{
+        margin : 40px 20px
+    }
+    .detailCard{
+        flex-direction: column;
+        padding: 10px;
+    }
+    .imageContainer{
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    .textDetails{
+        width: 100%;
+    }
+    .dataItem{
+        display: block;
+    }
+  }
